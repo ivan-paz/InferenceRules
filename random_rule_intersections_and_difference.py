@@ -10,7 +10,6 @@ store those intersections in Q
 3. R = R\Q
 
 """
-
 #..............................................................
 #Take a random rule r from R
 #   R = R \ rule

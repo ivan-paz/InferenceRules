@@ -46,11 +46,11 @@ def interval_intersection(int1, int2):
         return False
 #interval_intersection( (1,11), (9,12) )
 #interval_intersection( (2,5), (1,11) )
-
+"""
 #Given two rules Returns true if they intersect each other
 def intersection(rule1, rule2):
     intersection = True
-    if sameClass(rule1,rule2)==False:
+    if sameClass(rule1,rule2) == False:
     #For each set S calculate the minimum and maximum
         for i in range(len(rule1) - 1):
             if interval_intersection( interval(rule1[i]), interval(rule2[i]) )==False:
@@ -58,7 +58,21 @@ def intersection(rule1, rule2):
     else:
         intersection = False
     return intersection 
+"""
+# INTERSECTIONS DISREGARDING CLASS
+#Given two rules Returns true if they intersect each other
+def intersection(rule1, rule2):
+    intersection = True
+    #if sameClass(rule1,rule2) == False:
+    #For each set S calculate the minimum and maximum
+    for i in range(len(rule1) - 1):
+        if interval_intersection( interval(rule1[i]), interval(rule2[i]) )==False:
+            intersection = False
+    #else:
+    #    intersection = False
+    return intersection 
 
+    
 
 """
 Examples:
