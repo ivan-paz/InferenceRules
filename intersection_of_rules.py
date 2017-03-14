@@ -2,6 +2,8 @@
 """
 Created on Thu Mar  9 10:29:19 2017
 @author: ivanpaz
+
+
 Given two rules in the following format
 
 ( (1, 2, 3, 8, 11), (4, 6), 'A'),  ( (9,12),            5,     'C')
@@ -85,8 +87,12 @@ intersection( ( (2,5),             7,     'D'), ( (1, 2, 3, 8, 11), (4, 6), 'A')
 
 intersection ( (5, 4,'B'), ( (1, 2, 3, 8, 11), (4, 6), 'A'))
 
-"""
 
+EX2:
+intersection(((1,4),3,'A'), (2,(1,4),'A'))
+intersection(((1, 4), 3, 'A'), (4, (3, 6), 'A'))
+
+"""
 
 
 

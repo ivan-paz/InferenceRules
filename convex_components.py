@@ -1,5 +1,15 @@
 """
-General description
+
+Given a set of rules R
+select a random rule and find all rules that intersect with it
+then for each rule that intersects it
+find all its intersections
+repeat this process until no new intersections are found
+
+To reduce, at each step the size of R and to avoid double comparisons,
+when a rule is selected
+it is eliminated from R
+
 """
 from intersection_of_rules import *
 from random_rule_intersections_and_difference import *
@@ -8,7 +18,7 @@ def convex_set(R):
     convex_set = [ ]
     index = 0
     [Q, R] = random_rule_with_intersections(R)
-    #print('set: ', Q, "\n", 'R : ', R)
+    print('set: ', Q, "\n", 'R : ', R)
     convex_set.append(Q)
     if len(convex_set[index])>1: #if rule has intersect with other rule   
         for rule in convex_set[index]:
@@ -78,7 +88,17 @@ R = [
 (  (6,9),            11,    'A')
 ]
 convex_set(R)  
-
+#-------------------------  TEST 3 -----------------------
+R = [
+((1,3), 1, 'A'),
+(2, (1,4), 'A'),
+((1,4), 3, 'A'),
+(4, (3,6), 'A'),
+((3,5), 6, 'A'),
+(5,(6,8), 'A'),
+((4,7), 7, 'A')
+]
+convex_set(R)
 #
 #
 #

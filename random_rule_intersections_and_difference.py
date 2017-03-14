@@ -23,14 +23,50 @@ def select_random_rule(R):
 #Given a rule r and a rule base R
 #search for intersections between R and r
 def search_intersections(rule, R):
-    Q = []    
-    for Ri in R:   
-        if intersection(rule,Ri) == True:
-            Q.append(Ri)
-            R.remove(Ri)
-    Q.append(rule)
-    return [Q,R]
+    I = []    
+    for Ri in R:
+        #print(Ri)
+        if intersection(rule, Ri) == True:
+            #print('TRUE')
+            I.append(Ri)
+            #R.remove(Ri)
+    #Remove the rules with intersection from R
+    for Ri in I:
+        R.remove(Ri)
+    I.append(rule)
+    return [I,R]
+"""
+R = [
+(   2,  (1,4), 'A'),
+(   4,  (3,6), 'A'),
+( (4,7),  7,   'A')
+]
+search_intersections(  ((1,4), 3, 'A') ,R)
 
+R = [
+(2,(3,5),'A'),
+(3,(3,5),'A'),
+(4,(3,5),'A'),
+(5,(3,5),'A'),
+(6,(3,5),'A'),
+(7,(3,5),'A')
+]
+search_intersections(((1,8), 4, 'A'), R)
+
+"""
+
+
+
+
+
+
+#     functions below . . . . may become depreciated
+     
+    
+    
+    
+    
+"""    
 #Take a random rule from R
     # R = R\rule
     # Q = all Ri in R that intersect rule
@@ -41,6 +77,7 @@ def random_rule_with_intersections(R):
         [Q,R] = search_intersections(rule,R)
         return [Q, R]
 """
+"""
 R = [
 ( (1, 2, 3, 8, 11), (4, 6), 'A'),
 ( (9,12),            5,     'C'),
@@ -49,7 +86,6 @@ R = [
 ]
 random_rule_with_intersections(R)
 """
-
 
 
 
