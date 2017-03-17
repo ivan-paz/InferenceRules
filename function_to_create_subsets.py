@@ -77,6 +77,7 @@ def create_subsets(set1_class1,set2_class2):
     ordered_list = create_sets(set1_class1,set2_class2)
     list_of_subsets = subsets(ordered_list)
     return list_of_subsets
-#      print(create_subsets( (1,2,3,8,11), (5)))
+#      create_subsets( (1,2,3,8,11), (5))
+
 
 
