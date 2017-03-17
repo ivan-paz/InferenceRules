@@ -62,12 +62,12 @@ def partitions(R1, R2):
     else:
         return False
 
-R1 = ( (1,2,3,8,11), (4,6), 'A' )
-R2 = ( 5, 4, 'B')
-partitions( R1, R2 )
+#R1 = ( (1,2,3,8,11), (4,6), 'A' )
+#R2 = ( 5, 4, 'B')
+#partitions( R1, R2 )
 
 
 
-R1 = ((9,12), 5, 'C')
-R2 = ( (1,2,3,8,11), (4,6), 'A' )
-partitions( R1, R2 )
+#R1 = ((9,12), 5, 'C')
+#R2 = ( (1,2,3,8,11), (4,6), 'A' )
+#partitions( R1, R2 )
