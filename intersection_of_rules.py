@@ -40,6 +40,7 @@ def interval(element):
 #interval(7)
 #min_max((1,3,6))
 
+
 #Check if two intervals, defined through its minimum and maximum values,
 #intersect each other
 def interval_intersection(int1, int2):
