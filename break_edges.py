@@ -6,22 +6,70 @@ Created on Fri Mar 17 16:25:56 2017
 """
 from adjacent_matrix import *
 from create_partitions_from_connected_component import *
-
 from function_to_create_subsets import *
 from create_rules import *
-
 from functions_to_calculate_the_volume_of_a_partition import *
-
 from intersection_of_rules import *
-
 from generate_edges import *
-
-
 
 def exclude_current_edge(edge,edges):
     temp = copy.deepcopy(edges)
     temp.remove(edge)
     return temp
+
+Q = [
+        ( (1,2,3,8,11), (4,6), 'A'),
+        (       (9,12),     5, 'C'),
+        (            5,     4,'B')    
+    ]
+def cut(Q):
+    matrix = adjacent_matrix(Q)
+    edges = generate_edges(matrix)
+    edges = simplify_edges(edges)
+    for i in range(len(edges)): edges[i] = sorted(edges[i])
+    edges = sorted(edges, key = operator.itemgetter(1))
+  
+    P = [ ]
+    for edge in edges:
+        print('breaking',edge)
+        temp_P = [ ]
+        #print( Q[ int(edge[0]) ], Q[ int(edge[1]) ] )
+        temp_P = temp_P + partitions( Q[ int(edge[0]) ], Q[ int(edge[1]) ]  )
+        #print(temp_P)
+        clone_Q = copy.deepcopy(Q)
+        clone_Q.remove(Q[int(edge[0])])
+        clone_Q.remove(Q[int(edge[1])])
+        #print('clone_Q', clone_Q)
+        
+        for p in temp_P:
+            for x in clone_Q:
+                p.append(x)
+            print('p: ',p)
+            P.append(p)#########  Eliminate levels Rompe la herarquia
+    return P
+P = cut(Q)
+
+
+
+def iterate(Q):
+    conjuntos = cut(Q)
+    
+    nuevos_conjuntos = []
+    flag = True
+    while flag == True:
+        flag = False
+        for conjunto in conjuntos:
+            temp = cut(conjunto)
+            print(temp)
+            for i in temp:
+                print('iiiii: ', i)
+                if i != []:
+                    flag = True
+                    nuevos_conjuntos.append(i)
+            print('nuevos conjuntos',nuevos_conjuntos)
+        conjunto = nuevos_conjuntos
+
+iterate(Q)
 
 
 """
@@ -60,6 +108,14 @@ def cut(Q):
     return P
 
 P = cut(Q)  #   return all possible cut of the conected rules.
+#  first branch
+Q = [[(1, 2, 3, 8), (4, 6), 'A'],
+  [(9,), 5, 'C'],
+  [(11,), (4, 6), 'A'],
+  [(12,), 5, 'C'],
+  (5, 4, 'B')]
+  
+Q = [[(1, 2, 3), (4, 6), 'A'], [(5,), 4, 'B'], [(8,), (4, 6), 'A']]
 #-----------------------------------------------------------------------------
 
 #For each cut
@@ -93,6 +149,7 @@ def separate(n):
 1) 
 
 P[2]
+
 [new, independent_rules] = separate([[(1, 2, 3), (4, 6), 'A'],
  [(5,), 4, 'B'],
  [(8, 11), (4, 6), 'A'],
@@ -107,7 +164,7 @@ new
 [
 [[(8,), (4, 6), 'A'], [(9,), 5, 'C'], [(11,), (4, 6), 'A'],[(12,), 5, 'C']],
  [[(8, 11), (4,), 'A'], 
-  [(9, 12), (5,), 'C'], [(8, 11), (6,), 'A']]
+ [(9, 12), (5,), 'C'], [(8, 11), (6,), 'A']]
   ]
 
 [new, independent_rules] = separate(new)
