@@ -44,10 +44,10 @@ def cut(Q):
         for p in temp_P:
             for x in clone_Q:
                 p.append(x)
-            print('p: ',p)
+            #print('p: ',p)
             P.append(p)#########  Eliminate levels Rompe la herarquia
     return P
-P = cut(Q)
+#P = cut(Q)
 
 
 

@@ -3,7 +3,99 @@
 Created on Sun Mar 19 18:21:03 2017
 
 @author: ivan
+
+
+Q = [
+        ( (1,2,3,8,11), (4,6), 'A'),
+        (       (9,12),     5, 'C'),
+        (            5,     4,'B')    
+    ]
+
+
 """
+#----------------------------------------------------
+import numpy as np
+def shape(a):
+    a = np.array(a)
+    return(a.shape)
+#----------------------------------------------------
+    
+#  ORIGINAL WORKING FUNCTION
+def tee(q):
+    i = 0
+    d = {}
+    leafs = True
+    while leafs == True:
+        j = 0
+        leafs = False
+        if len(shape(q)) == 1:
+            print('Case1 ' , q)
+            temp1 = []
+            
+            i = i + 1
+            
+            for element in q:    
+                temp = cut(element)
+                
+                
+                for k in temp:
+                    j = j + 1
+                    d[str(i)+ ',' +str(j)] = k
+                    
+                
+                temp1 = temp1 + temp
+                if temp != []:
+                    leafs = True
+            temp = temp1
+            q = temp ###
+        else:
+            print('Case2', q)
+            temp = cut(q)
+            leafs = True
+            q = temp
+            
+            i = i + 1
+            for k in q:
+                j = j + 1
+                d[str(i)+ ',' +str(j)] = k
+            
+    return d       
+d  = tee(Q)
+#----------------------------------------------------------------------------
+"""
+
+
+
+
+"""
+
+
+"""
+def tee(q):
+    leafs = True
+    while leafs == True:
+        leafs = False
+        if len(shape(q)) == 1:
+            temp1 = []
+            for element in q:
+                temp = cut(element)
+                print('ADDING: ', temp)
+                temp1 = temp1 + temp
+                if temp != []:
+                    leafs = True
+            temp = temp1
+            q = temp ###
+            print('Case1 ' , q)
+        else:
+            temp = cut(q)
+            leafs = True
+            q = temp
+            print('Case2', q)
+    return leafs          
+tee(Q)
+
+
+
 
 class Tree(object):
     "Generic tree node."
@@ -19,7 +111,6 @@ class Tree(object):
         assert isinstance(node, Tree)
         self.children.append(node)
 
-
 #    *
 #   /|\
 #  1 2 +
@@ -28,41 +119,45 @@ class Tree(object):
 t = Tree('*', [Tree('1', [Tree('1,1')]),
                Tree('2'),
                Tree('3', [ Tree('3,1'),
-                          Tree('3,2') ])])
-
+                           Tree('3,2') ])])
 for i in t.children:
-    print(i)
-    for j in i.children:
-        print(j)
-    
+    print(i.children)
+t.add_child([Tree('11'),[Tree('1')]])
 
-d = {}
-P = cut(Q)
-t = Tree('*')
-for i in range(len(P)):
-    d[str(i)] = P[i] 
-    t.add_child(Tree(str(i)))
+def tee(q):
+   
+    t = Tree('*')
+    leafs = True
+    while leafs == True:
+        i = 0
+        j = 0
+        leafs = False
+        if len(shape(q)) == 1:
+            print('Case1 ' , q)
+            temp1 = []
+            for element in q:    
+                temp = cut(element)
+                
+                for k in temp:
+                    j = j + 1
+                    t.add_child([Tree(str(k))])
+                
+                temp1 = temp1 + temp
+                if temp != []:
+                    leafs = True
+            temp = temp1
+            q = temp ###
+        else:
+            print('Case2', q)
+            temp = cut(q)
+            leafs = True
+            q = temp
+            
+            for k in q:
+                i = i + 1
+                d[str(i)+str(j)] = k
+            
+    return [d,k] 
+d  = tee(Q)
 
-
-    
-
-Q
-t = Tree('*')
-new_nodes = True
-
-while new_nodes == True:
-    new_nodes = False
-    p = cut(Q)
-    childrens = len(p)
-    for i in range(childrens):
-        print(p[i])
-        t.add_child( Tree(str(i),[ Tree(p[i]) ] ) )
-
-t.children[0].children
-
-
-t = Tree('*')
-import random
-for i in range(5):
-    if random.randint(1,4)%2 ==0:
-        t.add_child(Tree(str(i),[Tree('a')]))
+"""
