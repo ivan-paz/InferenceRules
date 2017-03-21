@@ -5,6 +5,8 @@ Created on Sun Mar 19 18:21:03 2017
 @author: ivan
 
 
+
+
 Q = [
         ( (1,2,3,8,11), (4,6), 'A'),
         (       (9,12),     5, 'C'),
@@ -12,16 +14,20 @@ Q = [
     ]
 
 
+a = np.array([(5, 4, 'B'), ((1, 2, 3, 8, 11), (4, 6), 'A'), ((9, 12), 5, 'C')], dtype = object)
+
 """
+from break_edges import *
 #----------------------------------------------------
 import numpy as np
 def shape(a):
-    a = np.array(a)
+    a = np.array(a,   dtype = object) #******
     return(a.shape)
 #----------------------------------------------------
     
 #  ORIGINAL WORKING FUNCTION
 def tee(q):
+    tree_leafs = []
     i = 0
     d = {}
     leafs = True
@@ -46,6 +52,10 @@ def tee(q):
                 temp1 = temp1 + temp
                 if temp != []:
                     leafs = True
+                else:
+                    new_leaf = element
+                    print('LEAF: ', element)
+                    tree_leafs.append(new_leaf)
             temp = temp1
             q = temp ###
         else:
@@ -59,8 +69,15 @@ def tee(q):
                 j = j + 1
                 d[str(i)+ ',' +str(j)] = k
             
-    return d       
-d  = tee(Q)
+    return [d, tree_leafs]
+
+
+
+#d  = tee(Q)
+#[d, leafs] = tee(Q)
+    
+#for leaf in leafs:
+#    print(leaf)
 #----------------------------------------------------------------------------
 """
 

@@ -22,6 +22,8 @@ Q = [
         (       (9,12),     5, 'C'),
         (            5,     4,'B')    
     ]
+    
+    
 def cut(Q):
     matrix = adjacent_matrix(Q)
     edges = generate_edges(matrix)
@@ -47,8 +49,65 @@ def cut(Q):
             #print('p: ',p)
             P.append(p)#########  Eliminate levels Rompe la herarquia
     return P
-#P = cut(Q)
+#   P = cut(Q)
 
+
+"""
+
+#           PROVES
+
+Q = [((6, 9), 11, 'A'), (8, (10, 14), 'A')]
+cut(Q)
+matrix
+edges
+edges = simplify_edges(edges)
+for i in range(len(edges)):
+    edges[i] = sorted(edges[i])
+    edges = sorted(edges, key = operator.itemgetter(1))
+edges
+
+partitions(Q[0],Q[1])
+#---------------------------------
+def cut(Q):
+    matrix = adjacent_matrix(Q)
+    edges = generate_edges(matrix)
+    edges = simplify_edges(edges)
+    for i in range(len(edges)): edges[i] = sorted(edges[i])
+    edges = sorted(edges, key = operator.itemgetter(1))
+  
+    P = [ ]
+    for edge in edges:
+        print('breaking',edge)
+        temp_P = [ ]
+        #print( Q[ int(edge[0]) ], Q[ int(edge[1]) ] )
+        if partitions( Q[ int(edge[0]) ], Q[ int(edge[1]) ]  ) != False:
+            temp_P = temp_P + partitions( Q[ int(edge[0]) ], Q[ int(edge[1]) ]  )
+        #print(temp_P)
+            clone_Q = copy.deepcopy(Q)
+            clone_Q.remove(Q[int(edge[0])])
+            clone_Q.remove(Q[int(edge[1])])
+        else:
+            P = False
+        #print('clone_Q', clone_Q)
+        if P != False:
+            for p in temp_P:
+                for x in clone_Q:
+                    p.append(x)
+                #print('p: ',p)
+                P.append(p)#########  Eliminate levels Rompe la herarquia
+        else:
+            P = Q
+    return P
+#   P = cut(Q)
+  
+"""
+
+
+
+
+
+
+"""
 
 
 def iterate(Q):
@@ -72,9 +131,8 @@ def iterate(Q):
 iterate(Q)
 
 
-"""
-Q is a connected set
-"""
+#Q is a connected set
+
 
 Q = [
         ( (1,2,3,8,11), (4,6), 'A'),
@@ -242,3 +300,4 @@ partition_volume([[(1, 2, 3, 8, 11), (4,), 'A'],
   [(9, 12), (5,), 'C'],
   [(1, 2, 3, 8, 11), (6,), 'A']])
 intersection(( (1,2,3,8,11), (4,6), 'A'),(       (9,12),     5, 'C'))
+"""
