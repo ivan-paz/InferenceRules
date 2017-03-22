@@ -5,24 +5,24 @@ Created on Fri Mar 17 16:25:56 2017
 @author: ivan
 """
 from adjacent_matrix import *
-from create_partitions_from_connected_component import *
+#from create_partitions_from_connected_component import *
 from function_to_create_subsets import *
 from create_rules import *
 from functions_to_calculate_the_volume_of_a_partition import *
-from intersection_of_rules import *
+#from intersection_of_rules import *
 from generate_edges import *
 
 def exclude_current_edge(edge,edges):
     temp = copy.deepcopy(edges)
     temp.remove(edge)
     return temp
-
+"""
 Q = [
         ( (1,2,3,8,11), (4,6), 'A'),
         (       (9,12),     5, 'C'),
         (            5,     4,'B')    
     ]
-    
+"""    
     
 def cut(Q):
     matrix = adjacent_matrix(Q)
@@ -52,8 +52,8 @@ def cut(Q):
 #   P = cut(Q)
 
 
-"""
 
+"""
 #           PROVES
 
 Q = [((6, 9), 11, 'A'), (8, (10, 14), 'A')]
@@ -99,8 +99,8 @@ def cut(Q):
             P = Q
     return P
 #   P = cut(Q)
-  
 """
+
 
 
 

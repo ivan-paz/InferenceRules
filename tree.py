@@ -4,27 +4,20 @@ Created on Sun Mar 19 18:21:03 2017
 
 @author: ivan
 
-
-
-
 Q = [
         ( (1,2,3,8,11), (4,6), 'A'),
         (       (9,12),     5, 'C'),
         (            5,     4,'B')    
     ]
-
-
-a = np.array([(5, 4, 'B'), ((1, 2, 3, 8, 11), (4, 6), 'A'), ((9, 12), 5, 'C')], dtype = object)
-
 """
 from break_edges import *
 #----------------------------------------------------
+#   a = np.array([(5, 4, 'B'), ((1, 2, 3, 8, 11), (4, 6), 'A'), ((9, 12), 5, 'C')], dtype = object)
 import numpy as np
 def shape(a):
-    a = np.array(a,   dtype = object) #******
+    a = np.array(a,   dtype = object) # dtype = object
     return(a.shape)
 #----------------------------------------------------
-    
 #  ORIGINAL WORKING FUNCTION
 def tee(q):
     tree_leafs = []
@@ -56,6 +49,7 @@ def tee(q):
                     new_leaf = element
                     print('LEAF: ', element)
                     tree_leafs.append(new_leaf)
+                    
             temp = temp1
             q = temp ###
         else:
@@ -71,8 +65,8 @@ def tee(q):
             
     return [d, tree_leafs]
 
-
-
+#Q = [((6, 9), 11, 'A'), (8, (10, 14), 'A')]
+#Q = [(12, (10, 13), 'B'), ((11, 13), (11, 13), 'D')]
 #d  = tee(Q)
 #[d, leafs] = tee(Q)
     

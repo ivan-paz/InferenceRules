@@ -21,7 +21,6 @@ takes all_connected_sets and returns R* and R'
 """
 
 
-
 """
 Given two rules in the following format
 
@@ -35,13 +34,6 @@ False if they do not intersect
 Two rules intersect each other if the intervals formed with the minimum and
 maximum values of the sets located at each parameter i intersect each other 
 """
-#...............................................................
-#Given two rules return False if they have the same class
-def sameClass(rule1,rule2):
-	class1 = rule1[-1]
-	class2 = rule2[-1]
-	if class1 != class2:
-		return False
 
 #Given a tuple, integer or float returns the maximum and minimum values
 def interval(element):
@@ -59,7 +51,6 @@ def interval(element):
 
 #interval(7)
 #min_max((1,3,6))
-
 
 #Check if two intervals, defined through its minimum and maximum values,
 #intersect each other
@@ -241,8 +232,7 @@ R = [
 ]
 Qi(R)
 """
-#------------------
-
+#---------------------------------------------------------
 def extract_connected_sets(R):
     convex_sets = []
     while len(R) > 0:
@@ -250,7 +240,19 @@ def extract_connected_sets(R):
         print(set_convex)
         convex_sets.append(set_convex)
     return convex_sets
-#-------------------------  TEST 2 -----------------------
+
+def connected_and_lonly_rules(all_connected_sets):
+    lonly_rules = []
+    connected_rules = []
+    for s in all_connected_sets:
+        if len(s) == 1:
+            lonly_rules = lonly_rules + s
+        else:
+            connected_rules.append(s)
+    return [lonly_rules,connected_rules]
+
+"""
+#-------------------------  TEST  -----------------------
 R = [
 #convex1
 ( (1, 2, 3, 8, 11), (4, 6), 'A'),
@@ -266,25 +268,12 @@ R = [
 (  (6,9),            11,    'A')
 ]
 all_connected_sets = extract_connected_sets(R)
-
-
-def connected_and_lonly_rules(all_connected_sets):
-    lonly_rules = []
-    connected_rules = []
-    for s in all_connected_sets:
-        if len(s) == 1:
-            lonly_rules.append(s)
-        else:
-            connected_rules.append(s)
-    return [lonly_rules,connected_rules]
             
 [ lonly_rules, connected_rules ] = connected_and_lonly_rules(all_connected_sets)
+print(lonly_rules)
+print(connected_rules)
 
-lonly_rules
-
-connected_rules
-
-
+"""
 
 
 

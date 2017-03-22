@@ -18,10 +18,12 @@ maximum values of the sets located at each parameter i intersect each other
 #...............................................................
 #Given two rules return False if they have the same class
 def sameClass(rule1,rule2):
-	class1 = rule1[-1]
-	class2 = rule2[-1]
-	if class1 != class2:
-		return False
+    class1 = rule1[-1]
+    class2 = rule2[-1]
+    if class1 != class2:
+        return False
+    else:
+          return True
 
 #Given a tuple, integer or float returns the maximum and minimum values
 def interval(element):
