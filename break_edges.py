@@ -51,253 +51,72 @@ def cut(Q):
     return P
 #   P = cut(Q)
 
-
-
 """
-#           PROVES
-
-Q = [((6, 9), 11, 'A'), (8, (10, 14), 'A')]
-cut(Q)
-matrix
-edges
-edges = simplify_edges(edges)
-for i in range(len(edges)):
-    edges[i] = sorted(edges[i])
-    edges = sorted(edges, key = operator.itemgetter(1))
-edges
-
-partitions(Q[0],Q[1])
-#---------------------------------
-def cut(Q):
-    matrix = adjacent_matrix(Q)
-    edges = generate_edges(matrix)
-    edges = simplify_edges(edges)
-    for i in range(len(edges)): edges[i] = sorted(edges[i])
-    edges = sorted(edges, key = operator.itemgetter(1))
-  
-    P = [ ]
-    for edge in edges:
-        print('breaking',edge)
-        temp_P = [ ]
-        #print( Q[ int(edge[0]) ], Q[ int(edge[1]) ] )
-        if partitions( Q[ int(edge[0]) ], Q[ int(edge[1]) ]  ) != False:
-            temp_P = temp_P + partitions( Q[ int(edge[0]) ], Q[ int(edge[1]) ]  )
-        #print(temp_P)
-            clone_Q = copy.deepcopy(Q)
-            clone_Q.remove(Q[int(edge[0])])
-            clone_Q.remove(Q[int(edge[1])])
-        else:
-            P = False
-        #print('clone_Q', clone_Q)
-        if P != False:
-            for p in temp_P:
-                for x in clone_Q:
-                    p.append(x)
-                #print('p: ',p)
-                P.append(p)#########  Eliminate levels Rompe la herarquia
-        else:
-            P = Q
-    return P
-#   P = cut(Q)
-"""
-
-
-
-
-
-
-
-"""
-
-
-def iterate(Q):
-    conjuntos = cut(Q)
-    
-    nuevos_conjuntos = []
-    flag = True
-    while flag == True:
-        flag = False
-        for conjunto in conjuntos:
-            temp = cut(conjunto)
-            print(temp)
-            for i in temp:
-                print('iiiii: ', i)
-                if i != []:
-                    flag = True
-                    nuevos_conjuntos.append(i)
-            print('nuevos conjuntos',nuevos_conjuntos)
-        conjunto = nuevos_conjuntos
-
-iterate(Q)
-
-
-#Q is a connected set
-
-
 Q = [
         ( (1,2,3,8,11), (4,6), 'A'),
         (       (9,12),     5, 'C'),
         (            5,     4,'B')    
     ]
-def cut(Q):
-    matrix = adjacent_matrix(Q)
-    edges = generate_edges(matrix)
-    edges = simplify_edges(edges)
-    for i in range(len(edges)): edges[i] = sorted(edges[i])
-    edges = sorted(edges, key = operator.itemgetter(1))
-    
-    P = [ ]
-    for edge in edges:
-        print('breaking',edge)
-        temp_P = [ ]
-        #print( Q[ int(edge[0]) ], Q[ int(edge[1]) ] )
-        temp_P = temp_P + partitions( Q[ int(edge[0]) ], Q[ int(edge[1]) ]  )
-    
-        other_edges = exclude_current_edge(edge,edges)
-        x = [ ]
-        for edge1 in other_edges:
-                x.append( Q[ int(edge1[1]) ] )
-                #print('x',x)
-                
-        for item in temp_P:
-            for rule in x:
-                item.append(rule)
-            P.append(item)
-    return P
-
-P = cut(Q)  #   return all possible cut of the conected rules.
-#  first branch
-Q = [[(1, 2, 3, 8), (4, 6), 'A'],
-  [(9,), 5, 'C'],
-  [(11,), (4, 6), 'A'],
-  [(12,), 5, 'C'],
-  (5, 4, 'B')]
-  
-Q = [[(1, 2, 3), (4, 6), 'A'], [(5,), 4, 'B'], [(8,), (4, 6), 'A']]
-#-----------------------------------------------------------------------------
-
-#For each cut
-
-n = [
-  [(1, 2, 3, 8), (4, 6), 'A'],
-  [(9,), 5, 'C'],
-  [(11,), (4, 6), 'A'],
-  [(12,), 5, 'C'],
-  (5, 4, 'B')
-  ]
-def separate(n):
-    matrix = adjacent_matrix(n)
-    independent_rules = [ ]
-    values = matrix.values()
-
-    indexes = []
-    for i in values:
-        if len(i)>0:
-            for j in i:
-                indexes.append(int(j))
-
-    for i in range(len(n)):
-        if i not in indexes:
-            independent_rules.append(n[i])
-    for i in independent_rules:
-        n.remove(i)
-    return [n,independent_rules]
-
-
-1) 
-
-P[2]
-
-[new, independent_rules] = separate([[(1, 2, 3), (4, 6), 'A'],
- [(5,), 4, 'B'],
- [(8, 11), (4, 6), 'A'],
- ((9, 12), 5, 'C')])
-new = [[(8, 11), (4, 6), 'A'], ((9, 12), 5, 'C')]
-
-independent_rules = [[(1, 2, 3), (4, 6), 'A'], [(5,), 4, 'B']]
-
-new = cut([[(8, 11), (4, 6), 'A'], ((9, 12), 5, 'C')])
-new
-
-[
-[[(8,), (4, 6), 'A'], [(9,), 5, 'C'], [(11,), (4, 6), 'A'],[(12,), 5, 'C']],
- [[(8, 11), (4,), 'A'], 
- [(9, 12), (5,), 'C'], [(8, 11), (6,), 'A']]
-  ]
-
-[new, independent_rules] = separate(new)
-
-
-
-
-Q = [
-        ( (1,2,3,8,11), (4,6), 'A'),
-        (       (9,12),     5, 'C'),
-        (            5,     4,'B')    
-    ]
-    
-
-P = cut(Q)
-new = P[2]
-
-I = []
-while len(new) > 0:
-    [new,independent_rules] = separate(new)
-    I.append(independent_rules)
-    new = cut(new)
-I
+"""
 #----------------------------------------------------
+#   a = np.array([(5, 4, 'B'), ((1, 2, 3, 8, 11), (4, 6), 'A'), ((9, 12), 5, 'C')], dtype = object)
+import numpy as np
+def shape(a):
+    a = np.array(a,   dtype = object) # dtype = object
+    return(a.shape)
+#----------------------------------------------------
+#  ORIGINAL WORKING FUNCTION
+def tee(q):
+    tree_leafs = []
+    i = 0
+    d = {}
+    leafs = True
+    while leafs == True:
+        j = 0
+        leafs = False
+        if len(shape(q)) == 1:
+            print('Case1 ' , q)
+            temp1 = []
+            
+            i = i + 1
+            
+            for element in q:    
+                temp = cut(element)
+                
+                
+                for k in temp:
+                    j = j + 1
+                    d[str(i)+ ',' +str(j)] = k
+                    
+                
+                temp1 = temp1 + temp
+                if temp != []:
+                    leafs = True
+                else:
+                    new_leaf = element
+                    print('LEAF: ', element)
+                    tree_leafs.append(new_leaf)
+                    
+            temp = temp1
+            q = temp ###
+        else:
+            print('Case2', q)
+            temp = cut(q)
+            leafs = True
+            q = temp
+            
+            i = i + 1
+            for k in q:
+                j = j + 1
+                d[str(i)+ ',' +str(j)] = k
+            
+    return [d, tree_leafs]
 
-Q = [
-        ( (1,2,3,8,11), (4,6), 'A'),
-        (       (9,12),     5, 'C'),
-        (            5,     4,'B')    
-    ]
-
-def all_partitions(Q):
-    P = cut(Q)
-    for p in P:
-        new = copy.deepcopy(p)
-        print('new: ', new)
-        I = []
-        while len(new)>0:
-            [new, independent_rules] = separate(new)
-            I.append(independent_rules)
-            new = cut(new)
-            print(I)
-all_partitions(Q)
-
-
-
-#Given a tuple, integer or float returns the maximum and minimum values
-def interval(element):
-    if type(element)==int:
-        minimum = element
-        maximum = element
-    elif type(element)==float:
-        minimum = element
-        maximum = element
-    elif type(element)==str:
-        minimum = float(element)
-        maximum = float(element)
-    else:
-        temp = []
-        for i in a:
-            temp.append(float(i))
-        element = temp
-        minimum = min(element)
-        maximum = max(element)
-    #print(minimum,maximum)
-    return (minimum,maximum)
-
-interval(('1','4'))
-
-
-
-
-partitions(( (1,2,3,8,11), (4,6), 'A'),(       (9,12),     5, 'C'))
-partition_volume([[(1, 2, 3, 8, 11), (4,), 'A'],
-  [(9, 12), (5,), 'C'],
-  [(1, 2, 3, 8, 11), (6,), 'A']])
-intersection(( (1,2,3,8,11), (4,6), 'A'),(       (9,12),     5, 'C'))
-"""
+#Q = [((6, 9), 11, 'A'), (8, (10, 14), 'A')]
+#Q = [(12, (10, 13), 'B'), ((11, 13), (11, 13), 'D')]
+#d  = tee(Q)
+#[d, leafs] = tee(Q)
+    
+#for leaf in leafs:
+#    print(leaf)
+#----------------------------------------------------------------------------

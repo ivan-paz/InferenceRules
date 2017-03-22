@@ -7,7 +7,7 @@ from functions_to_calculate_the_volume_of_a_partition import *
 #from intersection_of_rules import *
 #from generate_edges import *
 from break_edges import *
-from tree import *
+#from tree import *
 from compare_partitions_volumes import *
 
 #--------------------------------------------

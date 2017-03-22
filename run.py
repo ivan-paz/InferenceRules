@@ -56,6 +56,8 @@ R = [
 (   8,             (10,14), 'A'),
 (  (6,9),            11,    'A')
 ]
+print('Rules', R)
+print('--------------------------------------------------')
 # Separate R into its connected components
 all_connected_sets = extract_connected_sets( R )
 #Separate the connected components into lonly rules and connected components
@@ -65,7 +67,8 @@ all_connected_sets = extract_connected_sets( R )
 optimum_partitions = extract_optimum_partitions( connected_rules )
 #Put again all the rules together
 rules = put_rules_together( optimum_partitions, lonly_rules )
-
+for rule in rules:
+    print(rule)
 #Check that there are no intersections among the resulting rules
 adjacent_matrix( rules )
 
