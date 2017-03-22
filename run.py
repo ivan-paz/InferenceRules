@@ -16,6 +16,7 @@
 #-----------------------------------------------------------------------
 from splitR import *
 from optimum_partition_for_Q import *
+from extract_optimum_partitions_and_put_rules_together import *
 
 def extract_optimum_partitions(connected_rules):
     optimum_partitions = []
@@ -36,6 +37,8 @@ def put_rules_together(optimum_partitions,lonly_rules):
         rules.append(rule)
     return rules
 #-----------------------------------------------------------------------
+
+
 
 # Consider the following rule base:
 R = [
@@ -60,6 +63,7 @@ print('Rules', R)
 print('--------------------------------------------------')
 # Separate R into its connected components
 all_connected_sets = extract_connected_sets( R )
+print('all connected sets : ', all_connected_sets)
 #Separate the connected components into lonly rules and connected components
 #with more than one rule
 [ lonly_rules, connected_rules ] = connected_and_lonly_rules( all_connected_sets )
@@ -67,6 +71,7 @@ all_connected_sets = extract_connected_sets( R )
 optimum_partitions = extract_optimum_partitions( connected_rules )
 #Put again all the rules together
 rules = put_rules_together( optimum_partitions, lonly_rules )
+print('Set of rules from which inference rules can be derived: ')
 for rule in rules:
     print(rule)
 #Check that there are no intersections among the resulting rules

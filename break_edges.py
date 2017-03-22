@@ -33,7 +33,7 @@ def cut(Q):
   
     P = [ ]
     for edge in edges:
-        print('breaking',edge)
+        #print('breaking',edge)
         temp_P = [ ]
         #print( Q[ int(edge[0]) ], Q[ int(edge[1]) ] )
         temp_P = temp_P + partitions( Q[ int(edge[0]) ], Q[ int(edge[1]) ]  )
@@ -75,7 +75,7 @@ def tee(q):
         j = 0
         leafs = False
         if len(shape(q)) == 1:
-            print('Case1 ' , q)
+            #print('Case1 ' , q)
             temp1 = []
             
             i = i + 1
@@ -94,13 +94,13 @@ def tee(q):
                     leafs = True
                 else:
                     new_leaf = element
-                    print('LEAF: ', element)
+                    #print('LEAF: ', element)
                     tree_leafs.append(new_leaf)
                     
             temp = temp1
             q = temp ###
         else:
-            print('Case2', q)
+            #print('Case2', q)
             temp = cut(q)
             leafs = True
             q = temp

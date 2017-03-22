@@ -237,7 +237,7 @@ def extract_connected_sets(R):
     convex_sets = []
     while len(R) > 0:
         [set_convex, R] = Qi(R)
-        print(set_convex)
+        #print(set_convex)
         convex_sets.append(set_convex)
     return convex_sets
 

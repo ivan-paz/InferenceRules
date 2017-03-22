@@ -64,7 +64,7 @@ def compare_volumes(volumes_same_dimension,indexes,longitude):
         #print(position)
         position = position - 1
         array = take_entrance(volumes_same_dimension, position)
-        print(position, array)
+        #print(position, array)
         habemus_maximum = max_of_entrance(array)
         if habemus_maximum != False:
             index_of_maximum_volume = habemus_maximum
@@ -79,9 +79,9 @@ def max_volume(rule_sets):
         volume = partition_volume(rule_set)
         volume = simplify_volume(volume)
         volumes.append(volume)
-    print(volumes)
+    #print(volumes)
     longitude = max_len(volumes)
-    print(longitude)
+    #print(longitude)
     
     candidates = []
     indexes = []
@@ -90,7 +90,7 @@ def max_volume(rule_sets):
         if len(v) == longitude:
             candidates.append(v)
             indexes.append(i)
-    print(candidates,indexes)
+    #print(candidates,indexes)
     index_of_partition_with_maximum_volume = compare_volumes(candidates,indexes,longitude)
     
     if index_of_partition_with_maximum_volume != False:
