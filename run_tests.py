@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+"""
+Created on Thu Mar 23 11:15:44 2017
+
+@author: ivan
+"""
+
+# -*- coding: utf-8 -*-
 #-----------------------------------------------------------------------
 #        This script takes a rule base R
 #        in which rules have the following form:
@@ -17,6 +24,9 @@
 from splitR import *
 from optimum_partition_for_Q import *
 
+def print_list(some_list):
+    for i in some_list:
+        print(i)
 
 # Consider the following rule base:
 R = [
@@ -38,11 +48,13 @@ R = [
 (   8,             (10,14), 'A'),
 (  (6,9),            11,    'A')
 ]
-print('Rules', R)
+print('Rules test 1')
+print_list(R)
 print('--------------------------------------------------')
 # Separate R into its connected components
 all_connected_sets = extract_connected_sets( R )
-print('all connected sets : ', all_connected_sets)
+print('all connected sets : ')
+print_list(all_connected_sets)
 #Separate the connected components into lonly rules and connected components
 #with more than one rule
 [ lonly_rules, connected_rules ] = connected_and_lonly_rules( all_connected_sets )
@@ -55,4 +67,40 @@ for rule in rules:
     print(rule)
 #Check that there are no intersections among the resulting rules
 adjacent_matrix( rules )
+
+
+# Test 2
+print('Test 2')
+R = [
+        ((1,2,3,8,11),(4,6),'A'),
+        (5,4,'B')
+        ]
+all_connected_sets = extract_connected_sets(R)
+print_list(all_connected_sets)
+[lonly_rules, connected_rules] = connected_and_lonly_rules(all_connected_sets)
+print(lonly_rules,connected_rules)
+optimum_partitions = extract_optimum_partitions(connected_rules)
+print(optimum_partitions)
+
+#----------------------------------------------------------
+#
+#         Test 3
+#
+#----------------------------------------------------------
+print( ' Test  3 ' )
+R = [
+        ((6,10),(4,6),'A'),
+        (    8, (3,7),'A'),
+        ((7,12),   5, 'B')
+        ]
+all_connected_sets = extract_connected_sets(R)
+[lonly_rules, connected_rules] = connected_and_lonly_rules(all_connected_sets)
+optimum_partitions = extract_optimum_partitions( connected_rules )
+
+[  d,leafs  ] = tee(R)
+for i in d:
+    print(i)
+
+print_list( optimum_partitions)
+
 

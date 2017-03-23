@@ -70,12 +70,3 @@ def put_rules_together(optimum_partitions,lonly_rules):
         rules.append(rule)
     return rules
 #-----------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
