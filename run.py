@@ -16,8 +16,9 @@
 #-----------------------------------------------------------------------
 from splitR import *
 from optimum_partition_for_Q import *
-from extract_optimum_partitions_and_put_rules_together import *
+#from extract_optimum_partitions_and_put_rules_together import *
 
+"""
 def extract_optimum_partitions(connected_rules):
     optimum_partitions = []
     for q in connected_rules:
@@ -37,7 +38,7 @@ def put_rules_together(optimum_partitions,lonly_rules):
         rules.append(rule)
     return rules
 #-----------------------------------------------------------------------
-
+"""
 
 
 # Consider the following rule base:
