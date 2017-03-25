@@ -50,7 +50,7 @@ optimum_partition(Q)
 #     Extract optimum partition for each one of the connected
 #     sets of rules
 def extract_optimum_partitions(connected_rules):
-    optimum_partitions = []
+    optimum_partitions = [ ]
     for q in connected_rules:
         opt = optimum_partition(q)
         if opt == False:
