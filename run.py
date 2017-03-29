@@ -57,4 +57,4 @@ for rule in rules:
     print(rule)
 #Check that there are no intersections among the resulting rules
 #adjacent_matrix( rules )
-
+print('All conected sets ', all_connected_sets)
