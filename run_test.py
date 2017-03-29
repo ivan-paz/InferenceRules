@@ -24,9 +24,17 @@ def print_list(some_list):
         print(i)
 
 
-# Consider the following rule base: (Add here the rule base for the proves)
-R = [( (1,2,3,8,11), (4,6), 'A'), (5, 4, 'B'), ( (9,12), 5, 'C')]
+# Rule base.
+# Write here the rule base for the test
+# For example
+R = [
+( (1,2,3,8,11), (4,6), 'A'), 
+(5, 4, 'B'), 
+( (9,12), 5, 'C')
+]
+
 """
+#Example 2
 R = [
 #connected 1
 ( (1, 2, 3, 8, 11), (4, 6), 'A'),
@@ -49,7 +57,7 @@ R = [
 ]
 """
 
-print('Rules test 1')
+print('Rules : ')
 print_list(R)
 print('--------------------------------------------------')
 # Separate R into its connected components
@@ -63,9 +71,9 @@ print_list(all_connected_sets)
 optimum_partitions = extract_optimum_partitions( connected_rules )
 #Put again all the rules together
 rules = put_rules_together( optimum_partitions, lonly_rules )
-print('Set of rules from which inference rules can be derived: ')
+print('Final set of rules :  ')
 for rule in rules:
     print(rule)
-#Check that there are no intersections among the resulting rules
-adjacent_matrix( rules )
+# Check that there are no intersections among the resulting rules
+# adjacent_matrix( rules )
 
