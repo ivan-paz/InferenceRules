@@ -15,9 +15,17 @@ from splitR import *
 from optimum_partition_for_Q import *
 
 #   Read all_connected_sets and indexes_all_connected sets
+def read(file_name):
+    with open( file_name) as json_data:
+        t = json.load(json_data)
+	print(t)
+
+read(
+
+
 
 def new(instance, all_connected_sets, indexes_all_connected_sets):
-
+	print('do nothing')
 
 
 
