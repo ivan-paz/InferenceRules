@@ -15,7 +15,7 @@
 #    there would not be contradictions between the rules
 #-----------------------------------------------------------------------
 import json
-from splitR import *
+from splitR_version1 import * #CURRENT VERSION
 from optimum_partition_for_Q import *
 
 
@@ -39,10 +39,14 @@ R = [
 (   8,             (10,14), 'A'),
 (  (6,9),            11,    'A')
 ]
-
+#--------------------------------------
+#    Write json data
+#--------------------------------------
 def write(file_name,data):
     with open (file_name, 'w') as f:
         json.dump(data,f)
+#--------------------------------------
+
 
 print('Rules', R)
 print('--------------------------------------------------')
@@ -63,12 +67,8 @@ print('lonly rules: ', lonly_rules)
 print('lonly rules indexes: ', lonly_rules_indexes)
 
 print('connected rules: ', connected_rules)
-with open('connected_rules.json', 'w') as f:
-    json.dump(connected_rules, f)
 
 print('connected rules indexes: ', connected_rules_indexes)
-with open('connected_rules_indexes.json', 'w') as f:
-    json.dump(connected_rules_indexes, f)
 
 #Create the optimim partition for each connected component with more than one rule
 #optimum_partitions = extract_optimum_partitions( connected_rules )

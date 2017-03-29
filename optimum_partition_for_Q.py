@@ -46,9 +46,11 @@ optimum_partition(Q)
 Q = [(12, (10, 13), 'B'), ((11, 13), (11, 13), 'D')]
 optimum_partition(Q)
 """
-
+#------------------------------------------------------------
 #     Extract optimum partition for each one of the connected
 #     sets of rules
+#------------------------------------------------------------
+
 def extract_optimum_partitions(connected_rules):
     optimum_partitions = [ ]
     for q in connected_rules:
