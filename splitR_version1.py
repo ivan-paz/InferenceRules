@@ -238,16 +238,12 @@ Qi(R)
 #---------------------------------------------------------
 def extract_connected_sets(R):
     connected_sets = []
-    indexes_connected_sets = [ ]
-    index = -1
     while len(R) > 0:
-        index = index + 1
         [set_connected, R] = Qi(R)
         connected_sets.append(set_connected)
-        indexes_connected_sets.append(index)
-    return [ connected_sets, indexes_connected_sets ]
+    return connected_sets
 
-def connected_and_lonly_rules( all_connected_sets, indexes_connected_sets ):
+def connected_and_lonly_rules( all_connected_sets ):
     lonly_rules = []
     lonly_rules_indexes = []
     connected_rules = []
@@ -257,10 +253,10 @@ def connected_and_lonly_rules( all_connected_sets, indexes_connected_sets ):
         counter = counter + 1
         if len(s) == 1:
             lonly_rules = lonly_rules + s
-            lonly_rules_indexes.append(indexes_connected_sets[counter])
+            lonly_rules_indexes.append( counter )
         else:
             connected_rules.append(s)
-            connected_rules_indexes.append( indexes_connected_sets[counter])
+            connected_rules_indexes.append(  counter )
     return [ lonly_rules, lonly_rules_indexes, connected_rules, connected_rules_indexes ]
 
 """

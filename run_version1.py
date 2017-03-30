@@ -51,28 +51,32 @@ def write(file_name,data):
 print('Rules', R)
 print('--------------------------------------------------')
 # Separate R into its connected components
-[ all_connected_sets, indexes_connected_sets ] = extract_connected_sets( R )
+all_connected_sets = extract_connected_sets( R )
+
 print('All connected sets : ')
 for i in range (len(all_connected_sets)): print(i,all_connected_sets[i])
-for i in range (len(indexes_connected_sets)): print(i, indexes_connected_sets[i])
 
 write('all_connected_sets.json', all_connected_sets)
-write('indexes_connected_sets.json', indexes_connected_sets)
 
-#Separate the connected components into lonly rules and connected components
-#with more than one rule
-[ lonly_rules, lonly_rules_indexes, connected_rules, connected_rules_indexes ] = connected_and_lonly_rules( all_connected_sets, indexes_connected_sets )
+# Separate the connected components into
+# lonly rules and connected components
+# with more than one rule
+[ lonly_rules, lonly_rules_indexes, connected_rules, connected_rules_indexes ] = connected_and_lonly_rules( all_connected_sets )
+
 
 print('lonly rules: ', lonly_rules)
 print('lonly rules indexes: ', lonly_rules_indexes)
+write('lonly_rules.json', lonly_rules)
+write('lonly_rules_indexes.json',lonly_rules_indexes)
+#print('connected rules: ', connected_rules)
+#write('connected_rules.json', connected_rules)
+#print('connected rules indexes: ', connected_rules_indexes)
+write('connected_rules_indexes.json', connected_rules_indexes)
 
-print('connected rules: ', connected_rules)
-
-print('connected rules indexes: ', connected_rules_indexes)
 
 #Create the optimim partition for each connected component with more than one rule
-#optimum_partitions = extract_optimum_partitions( connected_rules )
-
+optimum_partitions = extract_optimum_partitions( connected_rules )
+write( 'optimum_partitions.json', optimum_partitions )
 
 #Put again all the rules together
 #rules = put_rules_together( optimum_partitions, lonly_rules )
