@@ -16,4 +16,7 @@ pattern = [ 2, 5, 'A']
 pattern = [ 5, 5, 'B']
 new_rule_base = process_new_pattern( pattern )
 
+print('---------------  his is the new base of rules : ')
+for i in new_rule_base:
+    print(i)
 

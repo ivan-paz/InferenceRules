@@ -116,7 +116,7 @@ def remaining_partitions(optimum_partitions, optimum_partitions_indexes, lonly_r
         flag = index in indexes_of_intersected_sets
         if flag == False:
             kept_lonly.append(lonly_rules[i])
-    return [ kept_partitions, kept_lonly]
+    return [ kept_partitions, kept_lonly ]
 
 #print( 'REMAINING PARTITIONS : ')
 
@@ -131,7 +131,7 @@ def remaining_partitions(optimum_partitions, optimum_partitions_indexes, lonly_r
 def not_intersected_union_new_set(not_intersected, new_set):
     union = []
     for i in not_intersected:
-        for j in i: union = union + j
+        union = union + i
     for i in new_set:
         union.append(i)
     return union
@@ -158,7 +158,7 @@ def as_tuple(iterable):
             _list.append(item)
         else:
             _list.append(item)
-    the_tuple = tuple(_list)
+            the_tuple = tuple(_list)
     return the_tuple
 
 def format_new_set(new_set):
@@ -167,6 +167,19 @@ def format_new_set(new_set):
         i = as_tuple(i)
         formatted.append(i)
     return formatted
+def as_list(new_set):
+    _list = []
+    for i in new_set:
+        i = list(i)
+        _list.append(i)
+    return _list
+
+def remove_risk(new_set):
+    _list = []
+    for rule in new_set:
+        rule.pop()
+        _list.append(rule)
+    return _list
 
 #--------------------------------------
 def process_new_pattern(pattern):
@@ -177,7 +190,7 @@ def process_new_pattern(pattern):
     
     # Add risk parameter to the new (connected) set for Rules
     for rule in new_set: rule.append(1)
-    print('Set without rulex', new_set)
+    #print('New connected set without RULEX', new_set)
     #FORMART INTO TUPLES
     new_set = format_new_set(new_set)
     #Write the the new connected set into a file to apply Rulex to it
@@ -185,7 +198,12 @@ def process_new_pattern(pattern):
 
     new_set = rulex(new_set)
     print('New set after RULEX', new_set)
+
+    new_set = as_list(new_set)
+    new_set = remove_risk(new_set)###################
+    print('new set for cut', new_set)
     new_set = optimum_partition( new_set)
+    print('New set optimum partition', new_set)
 
     optimum_partitions = read('optimum_partitions.json')
     optimum_partitions_indexes = read('connected_rules_indexes.json')
@@ -193,10 +211,14 @@ def process_new_pattern(pattern):
     lonly_rules_indexes = read('lonly_rules_indexes.json')
 
     not_intersected = remaining_partitions(optimum_partitions, optimum_partitions_indexes, lonly_rules, lonly_rules_indexes,indexes_of_intersected_sets)
-    print('not intersected', not_intersected)
-    ###new_rule_base = not_intersected_union_new_set(not_intersected,new_set)
-#    return new_rule_base
+    print('Not intersected: ', not_intersected)
+    for j in not_intersected:
+        print('j',j)
+        for k in j: print(k)
+    new_rule_base = not_intersected_union_new_set(not_intersected,new_set)
+    return new_rule_base
 
 
 #pattern = [ 2,  5,  'A' ]
 #print('new rule base: ', process_new_pattern(pattern))
+
