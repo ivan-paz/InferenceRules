@@ -24,6 +24,11 @@ def optimum_partition(Q):
         else:
             return False #There is no partition to do. Probably the connected set has the same class.
 
+
+#[ d, leafs ] = tee( [[(9, 12), 5, 'C'], [(1, 2, 3, 8, 11), (4, 6), 'A'], [5, (4, 5), 'B']] )
+#print(d)
+#print(leafs)
+#print('optimim partition',optimum_partition( [ [(9, 12), 5, 'C'], [(1, 2, 3, 8, 11), (4, 6), 'A'], [5, (4, 5), 'B'] ] ) )
 """
 Example:
 
@@ -45,7 +50,9 @@ optimum_partition(Q)
 
 Q = [(12, (10, 13), 'B'), ((11, 13), (11, 13), 'D')]
 optimum_partition(Q)
+
 """
+
 #------------------------------------------------------------
 #     Extract optimum partition for each one of the connected
 #     sets of rules

@@ -93,7 +93,7 @@ def compare_volumes(volumes_same_dimension,indexes,longitude):
                                
 #compare_volumes([[[0, 0], [4, 1], [4, 2]], [[0, 0], [4, 1], [4, 2]], [[0, 0], [9, 1], [4, 2]]], [0, 2, 3], 3)  
 #compare_volumes([[[0, 0], [8, 1]], [[0, 0], [12, 1]], [[0, 0], [13, 1]], [[0, 0], [4, 1]], [[0, 0], [12, 1]], [[0, 0], [4, 1]], [[0, 0], [13, 1]]],[0, 1, 2, 3, 4, 5, 6],2)
-
+"""
 def max_volume(rule_sets):
     volumes = []
     for rule_set in rule_sets:
@@ -120,8 +120,8 @@ def max_volume(rule_sets):
     else:
         #     What to do????? THE RESULT DEPEND OF A RANDOM CHOISE !!!!!!!
         return rule_sets[0]
-
 """
+
 #---------------------------------------------------
 #   Version poker of volumes
 #
@@ -195,7 +195,6 @@ def max_volume(rule_sets):
     print('VOLUMES  copy ', volumes_copy)
     index_of_partition_with_max_volume = volumes_copy.index(result)
     return rule_sets[index_of_partition_with_max_volume]
-"""
 
 #max_part = max_volume([[[(1, 2, 3), (4, 6), 'A'], [(5,), (4, 5), 'B'], [(8,), (4, 6), 'A'], [(9,), 5, 'C'], [(11,), (4, 6), 'A'], [(12,), 5, 'C']], [[(1, 2, 3), (4,), 'A'], [(5,), (4, 5), 'B'], [(8, 11), (4,), 'A'], [(9, 12), (5,), 'C'], [(1, 2, 3, 8, 11), (6,), 'A']], [[(8,), (4, 6), 'A'], [(9,), 5, 'C'], [(11,), (4, 6), 'A'], [(12,), 5, 'C'], [(1, 2, 3), (4, 6), 'A'], [(5,), (4, 5), 'B']], [[(8, 11), (4,), 'A'], [(9, 12), (5,), 'C'], [(8, 11), (6,), 'A'], [(1, 2, 3), (4, 6), 'A'], [(5,), (4, 5), 'B']]])
 #print(max_part)
