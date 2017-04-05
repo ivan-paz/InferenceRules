@@ -8,8 +8,11 @@ from functions_to_calculate_the_volume_of_a_partition import *
 #from generate_edges import *
 from break_edges import *
 #from tree import *
-from compare_partitions_volumes import *
-
+#--------------------------------------
+#    Functions for create Rule base and Commit new Instance
+#--------------------------------------
+from compare_partitions_volumes import *             # This function works with run_test.py 
+#from compare_partitions_volumes_version1 import *     # This function works with test_new_pattern.py
 #--------------------------------------------
 #    This function takes a set of rules and
 #    returns the partition with higher volume

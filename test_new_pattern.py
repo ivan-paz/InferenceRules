@@ -9,7 +9,7 @@
 #-----------------------------------------------------------------
 from new_instance import *
 
-pattern = [ 2, 5, 'A']
+#pattern = [ 2, 5, 'A']
 
 
 # when processing new patterns first call rulex and then break
