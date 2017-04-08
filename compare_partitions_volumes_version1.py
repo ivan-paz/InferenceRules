@@ -1,29 +1,25 @@
 # -*- coding: utf-8 -*-
 """
-Function that takes a set of sets of rules
+
+Function that takes a set of sets of rules, each one corresponding
+to a different partition of an original connected set
 
 e.g set1, set2, set3 . . .
 
-and return the one with greater "volume"
+and return the set (partition) with greater "volume".
+
 
 """
 from functions_to_calculate_the_volume_of_a_partition import *
 from copy import deepcopy
 
-#def simplify_volume(volume):
- #   simplified = [ ]
-  #  for i in volume:
-   #     current = deepcopy(i)
-    #    print('current',current)
-     #   for j in volume:
-      #      print('j',j)
-       #     print('i,j:',i,j)
-        #    if ( i != j ) and ( current[1] == j[1] ):
-        #        current[0] = current[0] + j[0]
-        #if current not in simplified:
-        #    simplified = simplified + [current]
-    #return simplified
-
+#-------------------------------------------------------------
+# This function takes a volume
+# e.g [[0,0],[6,1],[3,1],[4,2]]
+# (where in each [i,j] i is the "volume" and j the "dimension")
+# and sum the entrances of same dimension
+# in the example the result would be: [[0,1],[9,1],[4,2]]
+#-------------------------------------------------------------
 def simplify_volume(volume):
     simplified = [ ]
     for i in range(len(volume)):
@@ -38,93 +34,18 @@ def simplify_volume(volume):
 #simplify_volume([[0, 0], [6, 1], [3, 1], [4, 2]])     
 #simplify_volume([[0, 0], [4, 1], [4, 1]])
 
-def max_len(volumes):
-    max_len = 0
-    for v in volumes:
-        current_len = len(v)
-        if current_len > max_len:
-            max_len = current_len
-    return max_len
 
-def take_entrance(volumes,position):
-    array = []    
-    for v in volumes:
-        array.append(v[position])
-    return array
-#take_entrance([[[0, 0], [4, 1], [4, 2]], [[0, 0], [4, 1], [4, 2]], [[0, 0], [9, 1], [4, 2]]], 0)
+#-----------------------------------------------------------------
+#       Version Poker of Volumes (or other desired property)
+#-----------------------------------------------------------------
 
-"""
-this function find if there is one maximum or
-if there are two partitions with the same volume
-"""
-def max_of_entrance(list_same_volume_entrance, indexes):
-    maximum = max(list_same_volume_entrance)
-    #print('MAXIMUM',maximum)
-    index_of_the_maximum = list_same_volume_entrance.index(maximum)#take the index of the first maximum 
-    # this is the place to take all indexes and made a decsition
-    #
-    unique = 0
-    for i in list_same_volume_entrance:
-        if maximum > i:
-            unique = unique + 1
-    if unique == len(list_same_volume_entrance) - 1:
-        index = list_same_volume_entrance.index(maximum)
-        return index
-    else:
-        return index_of_the_maximum
-#max_of_entrance([[4, 2], [4, 2], [4, 2]])
-#max_of_entrance([[4, 1], [4, 1], [9, 1]])
-
-
-#Compare volumes returns the index of the maximum volume
-def compare_volumes(volumes_same_dimension,indexes,longitude):
-    position = longitude
-    for i in range(longitude):
-        #print(position)
-        position = position - 1
-        array = take_entrance(volumes_same_dimension, position)
-        #print(position, array)
-        habemus_maximum = max_of_entrance(array, indexes)
-        #print('habemus_maximum', habemus_maximum)
-        if habemus_maximum != False:
-            index_of_maximum_volume = habemus_maximum
-            return indexes[habemus_maximum]
-    return False
-                               
-#compare_volumes([[[0, 0], [4, 1], [4, 2]], [[0, 0], [4, 1], [4, 2]], [[0, 0], [9, 1], [4, 2]]], [0, 2, 3], 3)  
-#compare_volumes([[[0, 0], [8, 1]], [[0, 0], [12, 1]], [[0, 0], [13, 1]], [[0, 0], [4, 1]], [[0, 0], [12, 1]], [[0, 0], [4, 1]], [[0, 0], [13, 1]]],[0, 1, 2, 3, 4, 5, 6],2)
-"""
-def max_volume(rule_sets):
-    volumes = []
-    for rule_set in rule_sets:
-        volume = partition_volume(rule_set)
-        volume = simplify_volume(volume)
-        volumes.append(volume)
-    print('volumes :', volumes)
-
-    longitude = max_len(volumes)
-    #print('longitude: ', longitude)    
-    
-    candidates = []
-    indexes = []
-    for i in range(len(volumes)):
-        v = volumes[i]
-        if len(v) == longitude:
-            candidates.append(v)
-            indexes.append(i)
-    #print('candidates', candidates, 'indexes', indexes)
-    index_of_partition_with_maximum_volume = compare_volumes(candidates,indexes,longitude)
-    
-    if index_of_partition_with_maximum_volume != False:
-        return rule_sets[index_of_partition_with_maximum_volume]
-    else:
-        #     What to do????? THE RESULT DEPEND OF A RANDOM CHOISE !!!!!!!
-        return rule_sets[0]
-"""
-
-#---------------------------------------------------
-#   Version poker of volumes
-#
+#-----------------------------------------------
+# Function "compare" takes two single volumes
+# that could have different volume and dimension
+# [volume1, dimension1] [volume2, domension2]
+# and returns the maximum considering volume
+# and dimension.
+#-----------------------------------------------
 def compare(vol1,vol2):
     if vol1[1] > vol2[1]:
         return 1
@@ -139,10 +60,20 @@ def compare(vol1,vol2):
 
 #print(compare([4,1],[3,1]))
 
+#-------------------------------------------------
+#  This function takes two volumes (one beguins being the
+#  winner and the other the contendent) that may have
+#  different dimensions e.g [[0,0],[2,1],[2,4]] and [[3,1],[1,4]]
+#  and returns:
+#  1  if the winner has the bigger volume.
+#  2  if the contendent has the bigger volume.
+#  3  if they are tie .
+#  They fight to see which one winns.
+#-------------------------------------------------
 def fight(winner, contendent):
     winner_copy = deepcopy(winner)
     contendent_copy = deepcopy(contendent)
-    
+
     hand1 = winner[-1]
     hand2 = contendent[-1]
     result = 3
@@ -152,6 +83,7 @@ def fight(winner, contendent):
         del winner[-1]
         hand2 = contendent[-1]
         del contendent[-1]
+
         result = compare(hand1, hand2)
         if result == 1:
             return winner_copy
@@ -164,42 +96,51 @@ def fight(winner, contendent):
     else:
         return result
 #print( fight( [[0,0],[5,1],[4,2]], [[10,1],[4,2]]) )
+#print(fight([[0,0],[1,2]],[[0,0]]))
 
 #   POKER FUNCTION       
+#   Best candidate
 def max_volume(rule_sets):
-    volumes = []
-    #indexes = []
-    #index = -1
+    volumes = []  # SPECIFIC PROPERTY TO MAXIMIZE
     for rule_set in rule_sets:
-        #index = index + 1
         volume = partition_volume(rule_set)
         volume = simplify_volume(volume)
         volumes.append(volume)
-     #   indexes.append(index)
-    print('volumes :', volumes)
+    #COPIES
+    print('Partitions volumes :', volumes)
     volumes_copy = deepcopy(volumes)
+    vol_copy2 = deepcopy(volumes)
+    
     winner = volumes[0]
-
     for i in range(1, len(volumes) ):
+
+        winner = deepcopy(winner)
+        
         contendent = volumes[i]
-        print(winner, contendent)
+    #    print('WINN', winner, 'CONTEN', contendent)
         result = fight(winner, contendent)
-        print('RESULT', result)
-        if result == winner:
-            winner = winner
-        elif result == contendent:
-            winner = contendent
+        # print('winner contendent', winner,contendent)
+    #    print('RESULT', result)
+        if result == vol_copy2[i-1]: #winner:
+            winner = vol_copy2[i-1]  #winner
+        elif result == vol_copy2[i]: #contendent:
+            winner = vol_copy2[i]    #contendent
         else:
-            winner = winner
-    print('RESULT', result)
-    print('VOLUMES  copy ', volumes_copy)
+            winner = vol_copy2[i-1]  #winner
+
+    #print('VOLUMES  copy ', volumes_copy)
     index_of_partition_with_max_volume = volumes_copy.index(result)
-    return rule_sets[index_of_partition_with_max_volume]
+    return rule_sets[ index_of_partition_with_max_volume ]
+
+#-------------------------------------------------------------
+#              Some tests for the function
+#-------------------------------------------------------------
 
 #max_part = max_volume([[[(1, 2, 3), (4, 6), 'A'], [(5,), (4, 5), 'B'], [(8,), (4, 6), 'A'], [(9,), 5, 'C'], [(11,), (4, 6), 'A'], [(12,), 5, 'C']], [[(1, 2, 3), (4,), 'A'], [(5,), (4, 5), 'B'], [(8, 11), (4,), 'A'], [(9, 12), (5,), 'C'], [(1, 2, 3, 8, 11), (6,), 'A']], [[(8,), (4, 6), 'A'], [(9,), 5, 'C'], [(11,), (4, 6), 'A'], [(12,), 5, 'C'], [(1, 2, 3), (4, 6), 'A'], [(5,), (4, 5), 'B']], [[(8, 11), (4,), 'A'], [(9, 12), (5,), 'C'], [(8, 11), (6,), 'A'], [(1, 2, 3), (4, 6), 'A'], [(5,), (4, 5), 'B']]])
 #print(max_part)
-#max_volume(leafs)
 
+
+#max_volume(leafs)
 """
 Test1
 
