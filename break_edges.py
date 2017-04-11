@@ -22,20 +22,22 @@ Q = [
         (       (9,12),     5, 'C'),
         (            5,     4,'B')    
     ]
-"""    
+""" 
     
 def cut(Q):
-    print('Connected_set to break tree-like :', Q)
+   # print('Connected_set to break tree-like :', Q)
     matrix = adjacent_matrix(Q)
-    print('Matrix', matrix)
+    #print('Matrix', matrix)
     edges = generate_edges(matrix)
     edges = simplify_edges(edges)
+   # print('Edges', edges)
+
     for i in range(len(edges)): edges[i] = sorted(edges[i])
     edges = sorted(edges, key = operator.itemgetter(1))
   
     P = [ ]
     for edge in edges:
-        print('breaking', edge)
+        #print('breaking', edge)
         temp_P = [ ]
         #print( Q[ int(edge[0]) ], Q[ int(edge[1]) ] )
         temp_P = temp_P + partitions( Q[ int(edge[0]) ], Q[ int(edge[1]) ]  )
@@ -98,7 +100,7 @@ def tee(q):
                     leafs = True
                 else:
                     new_leaf = element
-                    print('LEAF: ', element)
+                    #print('LEAF: ', element)
                     tree_leafs.append(new_leaf)
                     
             temp = temp1
@@ -120,7 +122,9 @@ def tee(q):
 #Q = [(12, (10, 13), 'B'), ((11, 13), (11, 13), 'D')]
 #d  = tee(Q)
 #[d, leafs] = tee(Q)
-    
+#[d,leafs] = tee(Q)
+#print(d)
+#print(leafs)
 #for leaf in leafs:
 #    print(leaf)
 #----------------------------------------------------------------------------
