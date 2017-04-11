@@ -47,9 +47,11 @@ def intersected_connected_sets( new_pattern, all_connected_sets ):
         index_counter += 1
         include_set = False
         for rule in connected_set:
-            #print(new_pattern, rule)
-            intersects = intersection(new_pattern, rule)
-            #print(intersects)
+            print(new_pattern, rule)
+            intersects = intersection(new_pattern, rule) # INTERSECTIONS OF ALREADY RULEXED INSTANCES
+            # Function that considers intersection with rules of same class in case they can be compressed by rulex
+            # intersects = intersection_with_new_pattern( new_pattern, rule )
+            print(intersects)
             if intersects == True:
                 include_set = True
                 #print(index_counter)
@@ -211,14 +213,19 @@ def process_new_pattern(pattern):
     lonly_rules_indexes = read('lonly_rules_indexes.json')
 
     not_intersected = remaining_partitions(optimum_partitions, optimum_partitions_indexes, lonly_rules, lonly_rules_indexes,indexes_of_intersected_sets)
-    print('Not intersected: ', not_intersected)
-    for j in not_intersected:
-        print('j',j)
-        for k in j: print(k)
-    new_rule_base = not_intersected_union_new_set(not_intersected,new_set)
+    print('Not intersected connected sets : ', not_intersected)
+   # for j in not_intersected:
+    #    print('j',j)
+     #   for k in j: print(k)
+    if new_set!= False:
+        new_rule_base = not_intersected_union_new_set(not_intersected,new_set)
+    else:
+        print('the new pattern do not intersect any connected set')
+        del pattern[-1] 
+        not_intersected.append( [pattern] )
+        new_rule_base = not_intersected
     return new_rule_base
 
 
 #pattern = [ 2,  5,  'A' ]
 #print('new rule base: ', process_new_pattern(pattern))
-

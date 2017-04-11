@@ -13,7 +13,9 @@ from new_instance import *
 
 
 # when processing new patterns first call rulex and then break
-pattern = [ 5, 5, 'B']
+#pattern = [ 5, 5, 'B']
+pattern = [ 5, 11, 'B' ] # pattern that do not intersects any connected set (in the example).
+
 new_rule_base = process_new_pattern( pattern )
 
 print('---------------  This is the new base of rules : ')
