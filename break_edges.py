@@ -25,7 +25,9 @@ Q = [
 """    
     
 def cut(Q):
+    print('Connected_set to break tree-like :', Q)
     matrix = adjacent_matrix(Q)
+    print('Matrix', matrix)
     edges = generate_edges(matrix)
     edges = simplify_edges(edges)
     for i in range(len(edges)): edges[i] = sorted(edges[i])
@@ -33,7 +35,7 @@ def cut(Q):
   
     P = [ ]
     for edge in edges:
-        #print('breaking',edge)
+        print('breaking', edge)
         temp_P = [ ]
         #print( Q[ int(edge[0]) ], Q[ int(edge[1]) ] )
         temp_P = temp_P + partitions( Q[ int(edge[0]) ], Q[ int(edge[1]) ]  )
@@ -47,7 +49,7 @@ def cut(Q):
             for x in clone_Q:
                 p.append(x)
             #print('p: ',p)
-            P.append(p)#########  Eliminate levels Rompe la herarquia
+            P.append(p) #########  Eliminate levels Rompe la herarquia
     return P
 #   P = cut(Q)
 
@@ -64,8 +66,10 @@ import numpy as np
 def shape(a):
     a = np.array(a,   dtype = object) # dtype = object
     return(a.shape)
-#----------------------------------------------------
-#  ORIGINAL WORKING FUNCTION
+
+#--------------------------------------------------
+#          ORIGINAL WORKING FUNCTION
+#---------------------------------------------------
 def tee(q):
     tree_leafs = []
     i = 0
@@ -94,7 +98,7 @@ def tee(q):
                     leafs = True
                 else:
                     new_leaf = element
-                    #print('LEAF: ', element)
+                    print('LEAF: ', element)
                     tree_leafs.append(new_leaf)
                     
             temp = temp1
@@ -109,7 +113,7 @@ def tee(q):
             for k in q:
                 j = j + 1
                 d[str(i)+ ',' +str(j)] = k
-            
+    #print('leafs' , tree_leafs)
     return [d, tree_leafs]
 
 #Q = [((6, 9), 11, 'A'), (8, (10, 14), 'A')]

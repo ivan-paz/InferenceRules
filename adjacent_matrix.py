@@ -35,21 +35,18 @@ def adjacent_matrix(R):
 #adjacent_matrix( [ ((6, 9), 11, 'A'), (8, (10, 14), 'A') ] )
 
 def adjacent_matrix(R):
+#    print('R', R)
     graph = {}
     for i in range( len(R) ):
         graph[str(i)] =  [ ]    
         for j in range( len(R) ):
             if ( i != j ) and intersection ( R[i], R[j] ) == True and sameClass(R[i],R[j]) == False:
-                #print(R[i], R[j])
+                print(R[i], R[j])
                 old = graph[str(i)]
                 new = old + [str(j)]
                 graph[str(i)] = new
+#    print(graph)
     return graph
-
-
-
-
-
 
 """
 in this graph

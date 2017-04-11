@@ -48,19 +48,16 @@ def intersected_connected_sets( new_pattern, all_connected_sets ):
         include_set = False
         for rule in connected_set:
             print(new_pattern, rule)
-            intersects = intersection(new_pattern, rule) # INTERSECTIONS OF ALREADY RULEXED INSTANCES
-            # Function that considers intersection with rules of same class in case they can be compressed by rulex
-            # intersects = intersection_with_new_pattern( new_pattern, rule )
-            print(intersects)
-            if intersects == True:
-                include_set = True
-                #print(index_counter)
+            #intersects = intersection(new_pattern, rule) # INTERSECTIONS OF ALREADY RULEXED INSTANCES
+            # Function that considers intersection or possible rule formation with Rulex
+            intersects = intersection_or_possible_rule_formation( new_pattern, rule, 1 )
+            print('Intersection with this rule: ', intersects)
+        if intersects == True:
+            include_set = True
         if include_set == True:
             indexes_of_intersected_sets.append(index_counter)
             intersected_sets.append(connected_set)
-    return [intersected_sets,  indexes_of_intersected_sets]
-
-
+    return [ intersected_sets,  indexes_of_intersected_sets ]
 #   NEW INSTANCE 
 #pattern = ( 2, 5, 'A' )
 
@@ -169,6 +166,7 @@ def format_new_set(new_set):
         i = as_tuple(i)
         formatted.append(i)
     return formatted
+
 def as_list(new_set):
     _list = []
     for i in new_set:
@@ -186,25 +184,22 @@ def remove_risk(new_set):
 #--------------------------------------
 def process_new_pattern(pattern):
     all_connected_sets = read('all_connected_sets.json')
-    [intersected_sets, indexes_of_intersected_sets] = intersected_connected_sets(pattern, all_connected_sets)
-    new_set = pattern_plus_intersections(pattern,intersected_sets)
-    
+    [ intersected_sets, indexes_of_intersected_sets ] = intersected_connected_sets( pattern,  all_connected_sets )
+    new_set = pattern_plus_intersections(pattern, intersected_sets)
+    # print('new set = pattern + intersected_Sets', new_set) 
     
     # Add risk parameter to the new (connected) set for Rules
     for rule in new_set: rule.append(1)
     #print('New connected set without RULEX', new_set)
     #FORMART INTO TUPLES
     new_set = format_new_set(new_set)
-    #Write the the new connected set into a file to apply Rulex to it
-    #write('new_set.json',new_set)
-
     new_set = rulex(new_set)
     print('New set after RULEX', new_set)
 
     new_set = as_list(new_set)
-    new_set = remove_risk(new_set)###################
-    print('new set for cut', new_set)
-    new_set = optimum_partition( new_set)
+    new_set = remove_risk(new_set)  ###################
+    print( 'New set for cut', new_set )
+    new_set = optimum_partition( new_set )
     print('New set optimum partition', new_set)
 
     optimum_partitions = read('optimum_partitions.json')
@@ -217,10 +212,10 @@ def process_new_pattern(pattern):
    # for j in not_intersected:
     #    print('j',j)
      #   for k in j: print(k)
-    if new_set!= False:
+    if new_set != False:
         new_rule_base = not_intersected_union_new_set(not_intersected,new_set)
     else:
-        print('the new pattern do not intersect any connected set')
+        print('The new pattern do not intersect any connected set')
         del pattern[-1] 
         not_intersected.append( [pattern] )
         new_rule_base = not_intersected

@@ -21,19 +21,19 @@ takes all_connected_sets and returns R* and R'
 """
 
 
-"""
-Given two rules in the following format
+#--------------------------------------------------------------------------------------
+#     Given two rules in the following format                                    ------
 
-R1 = ( (1, 2, 3, 8, 11), (4, 6), 'A')
-R2 = ( (9,12),            5,     'C')
+#     R1 = ( (1, 2, 3, 8, 11), (4, 6), 'A')                                      ------
+#     R2 = ( (9,12),            5,     'C')                                      ------
 
-The function " intersection " returns
-True if the rules intersect each other and
-False if they do not intersect
+#     The function " intersection " returns                                      ------
+#     True if the rules intersect each other and                                 ------
+#     False if they do not intersect                                             ------
 
-Two rules intersect each other if the intervals formed with the minimum and
-maximum values of the sets located at each parameter i intersect each other 
-"""
+#     Two rules intersect each other if the intervals formed with the minimum and  ----
+#     maximum values of the sets located at each parameter i intersect each other  ----
+#--------------------------------------------------------------------------------------
 
 #Given a tuple, integer or float returns the maximum and minimum values
 def interval(element):
@@ -290,6 +290,42 @@ print(connected_rules)
 #print(interval(11))
 #print(interval_intersection(interval(5),interval(5)))
 
+#--------------------------------------------------------------------------------------------
+#    Intersection: All parameters of the new instance intersect the intervals formed by
+#    the (min and max) values of an existing rule.
+#
+#    Possible rule formation: The new instance would have formed a rule with another instance.
+#---------------------------------------------------------------------------------------------
+def intersection_or_possible_rule_formation( new_pattern, rule, risk ):
+    intersection = True
+    for i in range( len(rule) - 1 ):
+        if interval_intersection( interval(new_pattern[i]), interval(rule[i]) ) == False:
+            intersection = False
+    #return intersection
+    possible_rule_formation = False
+    lenght = len(rule) -1
+    
+    if new_pattern[-1] == rule[-1]:
+        different_parameters = 0
+        for i in range( len(rule) -1 ):
+            if new_pattern[i] != rule[i]:
+                different_parameters += 1
+        if different_parameters <= risk:
+            possible_rule_formation = True
+    # Return True if either new_patterns intersects a rule or
+    # if it would have created a rule (by calling rulex) with another instance or rule
+    if intersection == True or possible_rule_formation == True:
+        return True
+    else:
+        return False
+
+#     Test to see if this really works
+#res = intersection_or_possible_rule_formation([1, 2, 'A'], [2,2,'A'], 1)
+#res = intersection_or_possible_rule_formation( [ 1, 2, 'A'], [2, 2, 'B'], 1)
+#print(res)
+
+
+
 #--------------------------------------------------------------------------------------
 #     Function " intersection_with_new_pattern( pattern, rule ) "
 #     This function call functions
@@ -298,12 +334,18 @@ print(connected_rules)
 #     and returns True (meaning the pattern and the rule intersect each other)
 #     if one of its parameters intersect
 #--------------------------------------------------------------------------------------
-def intersection_with_new_pattern( new_pattern, rule):
-    intersection = False
-    for i in range( len(rule) -1 ):
-        if interval_intersection( interval(new_pattern[i]), interval(rule[i]) ) == True:
-            intersection = True
-    return intersection
+ 
+#def intersection_with_new_pattern( new_pattern, rule):
+#    intersection = False
+#    for i in range( len(rule) -1 ):
+#        if interval_intersection( interval(new_pattern[i]), interval(rule[i]) ) == True:
+#            intersection = True
+#    return intersection
 #print( intersection_with_new_pattern( (5,4,'B'), (5,11,'B') ) )
 
 #print( intersection( (5, 4,'B'), (5, 11,'B') ) )
+
+
+
+
+

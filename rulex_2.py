@@ -30,7 +30,7 @@ presets = (
 def rulex(presets):
     i = -1
     for preset_1 in presets:
-        print('preset_1: ',preset_1)
+        #print('preset_1: ',preset_1)
         i = i + 1
         j = -1
         for preset_2 in presets:
@@ -41,7 +41,7 @@ def rulex(presets):
                     #print('dictionary',dictionary)
                     if dictionary != False:
                         rule = build_rule(preset_1, dictionary)
-                        print('rule: ', rule)
+         #               print('rule: ', rule)
                         #delete rules preset_1 and preset_2 and app rule
                         lst = list(presets)
                         if rule not in lst:
@@ -70,7 +70,7 @@ def is_compressible(preset_1, preset_2):
         return dictionary
     for i in range( len(preset_1) - 1 ):
         if(preset_1[i] != preset_2[i]):
-            print('preset 1 and 2 ', preset_1[i],preset_2[i])
+#            print('preset 1 and 2 ', preset_1[i],preset_2[i])
             dictionary[i] = set( [ preset_1[i], preset_2[i] ] )
     #print(dictionary)
     if bool(dictionary):
@@ -166,11 +166,11 @@ def non_redundant(rules):
             if rule2 != None and rule2 != rule1:
                 contained = 0
                 boolean = [(rule1 == rule2) for rule1, rule2 in zip(rule1,rule2)]
-                print(boolean)
+#                print(boolean)
                 trues = sum(boolean)
                 for i in range(len(boolean)):
                     if boolean[i] == False:
-                        print(rule1, rule2)
+ #                       print(rule1, rule2)
                         set1 = build_set(rule1[i])
                         set2 = build_set(rule2[i])
                         if set1.issubset(set2):
