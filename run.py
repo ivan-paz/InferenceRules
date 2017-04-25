@@ -11,34 +11,32 @@
 #
 #   Then, for each set in connected_rules the function extract_optimum_partition
 #   breaks each set fo rules in such a way that, if the intervals between the maximum and minumum
-# values of each parameter for each rule are consider as valid intervals for the class of the rule
-#    there would not be contradictions between the rules
+#   values of each parameter for each rule are consider as valid intervals for the class of the rule
+#   there would not be contradictions between the rules
 #-----------------------------------------------------------------------
 from splitR import *
 from optimum_partition_for_Q import *
 
-
-# Consider the following rule base:
+#----------------------------
+#         Test 1          ---           
+#----------------------------
+#   including (5, 5, B) in the original rules ***
 R = [
 #connected 1
+( (6,9),               11,  'A'),
+(    8,        (4,6,10,14), 'A'),
 ( (1, 2, 3, 8, 11), (4, 6), 'A'),
-(     5,             4,     'B'),
+#(     5,            (5, 4), 'B'), # ***
+(5,4,'B'),
 ( (9,12),            5,     'C'),
 #connected 2
-
 ( (2,5),             7,     'D'),
-
 #connected 3
 (20,                 20,    'D'),
-
 #connected 4
 ( (12),            (10,13), 'B'),
-( (11,13),          (11,13),'D'),
-#connected 5
-(   8,             (10,14), 'A'),
-(  (6,9),            11,    'A')
+( (11,13),          (11,13),'D')
 ]
-
 
 print('Rules', R)
 print('--------------------------------------------------')

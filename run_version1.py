@@ -18,7 +18,7 @@ import json
 from splitR_version1 import * #CURRENT VERSION
 from optimum_partition_for_Q import *
 
-
+"""
 # Consider the following rule base:
 R = [
 #connected 1
@@ -39,6 +39,20 @@ R = [
 (   8,             (10,14), 'A'),
 (  (6,9),            11,    'A')
 ]
+"""
+# Example Rules without (5,5,B) but with (8, (4,6,10,14), 'A')
+R = [
+        (20, 20, 'D'),
+        (5,4,'B'),
+        (12, (10,13), 'B'),
+        ((6,9), 11, 'A'),
+        ((9,12), 5, 'C'),
+        (8, (4,6,10,14), 'A'),
+        ((2,5), 7, 'D'),
+        ((11,13),(11,13),'D'),
+        ((1,2,3,8,11),(4,6),'A')
+        ]
+
 #--------------------------------------
 #    Write json data
 #--------------------------------------

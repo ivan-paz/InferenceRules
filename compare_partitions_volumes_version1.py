@@ -117,17 +117,18 @@ def max_volume(rule_sets):
         winner = deepcopy(winner)
         
         contendent = volumes[i]
-    #    print('WINN', winner, 'CONTEN', contendent)
+        print('WINN', winner, 'CONTEN', contendent)
         result = fight(winner, contendent)
         # print('winner contendent', winner,contendent)
-    #    print('RESULT', result)
-        if result == vol_copy2[i-1]: #winner:
-            winner = vol_copy2[i-1]  #winner
-        elif result == vol_copy2[i]: #contendent:
-            winner = vol_copy2[i]    #contendent
-        else:
-            winner = vol_copy2[i-1]  #winner
-
+        print('ganador', result)
+        winner = result
+        #if result == vol_copy2[i-1]: #winner:
+         #   winner = vol_copy2[i-1]  #winner
+       # elif result == vol_copy2[i]: #contendent:
+        #    winner = vol_copy2[i]    #contendent
+        #else:
+         #   winner = vol_copy2[i-1]  #winner
+        print('selection according to winner', winner)
     #print('VOLUMES  copy ', volumes_copy)
     index_of_partition_with_max_volume = volumes_copy.index(result)
     return rule_sets[ index_of_partition_with_max_volume ]
